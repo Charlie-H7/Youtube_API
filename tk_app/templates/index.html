@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tk</title>
+    </head>
+
+    <h1>list of comments</h1>
+    
+    <body>
+        
+
+        <a href="/comments?target=/">Fetch comments</a>
+
+        <!-- dynamic later (first see how to impl)-->
+        <a href="/livestream?target=/">Fecth live</a>
+
+        
+        <!-- Make a flaks templated comment for each file -->
+        
+            {% for comment in comments %}
+            <div style="border: 5px solid black;"></div>
+                {#comment.comment is a top level comment#}
+                <div>{{comment.comment}}</div>
+                <br> <!--Line break-->
+
+                {% for replies in comment.replies %}
+                    <br>
+                    <div>{{replies}}</div>
+                {% endfor %}
+                <br>
+                <br>
+                </div>
+            {% endfor %}
+
+        
+
+
+    </body>
+
+</html>
