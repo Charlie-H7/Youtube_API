@@ -12,9 +12,8 @@ from googleapiclient.discovery import build
 youtube = build('youtube', 'v3', developerKey=api_key)
 
 # Need to render index here since solely stickig to server side dynamic for now
-@tk_app.app.route('/comments/')
+@tk_app.app.route('/api/v1/comments/')
 def get_comments():
-
     comments = [] #just data top level comm
     replies_dict = [] #Stores replies and names of that list of dictionaries
     collective = [] #Use this to append TOTAL list of tied comments + replies PER TOP LVL 
@@ -60,75 +59,6 @@ def get_comments():
 
         temp = {"comment":comment_dat, "replies":replies}
         collective.append(temp)
-        
-        # DONT NEED FOR TOP LEVEL REPLIES
-        # Hold id for current comment
-        #comment_id = comment['snippet']['topLevelComment']['id']
-        #id = comment['snippet']['videoId']
+        context = {"comments":collective}
 
-
-        #comments.append(comment_dat)
-        #comments_id.append(comment_id) (not needed)
-    
-
-
-    # Correctly stores dat in mem
-    #print(f"COMMENT:{comments}\n")
-    
-    # print(f"COLLECTIVE: {collective}")
-
-    
-    # Testing static context redirect
-    #context = {"comments":["com1", "com2"]}
-    context = {"comments":collective}
-    #context = {"context":collective}
-
-    return flask.render_template("index.html", **context)
-
-@tk_app.app.route('/livestream/')
-def live_func():
-    print("bruh\n")
-
-    # NEED ID FOR THIS lol, get from videos api??
-    #0 Get current active livestreams chatid via broadcast api
-    #broadcasts = youtube.Broadcasts.list(
-
-    #)
-
-    #NEW 0) Automate getting video id's via 'search' method 'forMine' filter
-    #https://developers.google.com/youtube/v3/docs/search/list
-    # Need OAuth if using forMine
-    video_data = youtube.search().list(
-        part='snippet',
-        forMine=True,
-        type="video" # need to set this if 'forMine'
-    ).execute()
-
-    print(f"{video_data}\n")
-
-    #1 Make API req to chewtubes current livestream need id (need to make a request to BROADCAST list){0} 
-    #response = youtube.liveChatMessages.list(
-    #    part="snippet",
-    #    textFormat="plainText",
-    #)
-
-    # Static render for debug
-    context = {"comments":["com1", "com2"]}
-    return flask.render_template("index.html", **context)
-
-
-# Used for initial render
-@tk_app.app.route('/')
-def page_init():
-
-    
-
-    #tk_app.app.logger("bruh??")
-    print("bruh\n")
-    context = {"comments":["com1", "com2"]}
-    return flask.render_template("index.html", **context)
-
-# Flask API endpoint that sends get request for comments, and renders template. "officially dont know"
-# Would ideally need this api call to give me all the data I need before rendering
-
- 
+        return flask.jsonify(**context)
