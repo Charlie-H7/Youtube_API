@@ -1,0 +1,1 @@
+from tk_app.api.comment import get_comments

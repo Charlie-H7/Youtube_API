@@ -8,3 +8,4 @@ app = flask.Flask(__name__)
 #import tk_app.views
 # Import views to register the routes
 from tk_app.views import *
+import tk_app.api

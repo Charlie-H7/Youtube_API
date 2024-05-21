@@ -11,79 +11,79 @@ from googleapiclient.discovery import build
 # Establishes connection to youtube api
 youtube = build('youtube', 'v3', developerKey=api_key)
 
-# Need to render index here since solely stickig to server side dynamic for now
-@tk_app.app.route('/comments/')
-def get_comments():
+# # Need to render index here since solely stickig to server side dynamic for now
+# @tk_app.app.route('/comments/')
+# def get_comments():
 
-    comments = [] #just data top level comm
-    replies_dict = [] #Stores replies and names of that list of dictionaries
-    collective = [] #Use this to append TOTAL list of tied comments + replies PER TOP LVL 
+#     comments = [] #just data top level comm
+#     replies_dict = [] #Stores replies and names of that list of dictionaries
+#     collective = [] #Use this to append TOTAL list of tied comments + replies PER TOP LVL 
 
 
 
-    comments_id = [] # holds the id of comments corresponding to 'comments'
+#     comments_id = [] # holds the id of comments corresponding to 'comments'
 
-    # TODO: Make api request to youtube database, redirect to webpage with updated context
+#     # TODO: Make api request to youtube database, redirect to webpage with updated context
 
-    #comments_response = youtube.commentThreads().list(
-    comments_response = youtube.commentThreads().list(
-        part='snippet,replies', #Required (Optional 'replies' to include replies)
-        videoId="Uh3Drq60OBI", # 'v' query in video url
-        maxResults=7,  # Adjust as needed
-        textFormat="plainText" # textFormat is used to get plain text response instead of html (def)
-    ).execute()
+#     #comments_response = youtube.commentThreads().list(
+#     comments_response = youtube.commentThreads().list(
+#         part='snippet,replies', #Required (Optional 'replies' to include replies)
+#         videoId="Uh3Drq60OBI", # 'v' query in video url
+#         maxResults=7,  # Adjust as needed
+#         textFormat="plainText" # textFormat is used to get plain text response instead of html (def)
+#     ).execute()
     
-    # Pretty-print the JSON {yipee}
-    formatted_json = json.dumps(comments_response, indent=3)
+#     # Pretty-print the JSON {yipee}
+#     formatted_json = json.dumps(comments_response, indent=3)
 
-    print(f"{formatted_json}\n")
+#     print(f"{formatted_json}\n")
 
-    # Get all comments from json into a list data struct
-    for comment in comments_response['items']:
-        replies = [] # reset on new top_lvl comment
+#     # Get all comments from json into a list data struct
+#     for comment in comments_response['items']:
+#         replies = [] # reset on new top_lvl comment
 
-        # Tuple holding 'base' comment and id of that comment
-        #comment_dat = (comment['snippet']['topLevelComment']['snippet']['textDisplay'],
-        #               comment['snippet']['topLevelComment']['id'])
+#         # Tuple holding 'base' comment and id of that comment
+#         #comment_dat = (comment['snippet']['topLevelComment']['snippet']['textDisplay'],
+#         #               comment['snippet']['topLevelComment']['id'])
 
-        # Hold the text for the current comment
-        comment_temp = comment['snippet']['topLevelComment']['snippet']['textDisplay']
-        username = comment['snippet']['topLevelComment']['snippet']['authorDisplayName']
+#         # Hold the text for the current comment
+#         comment_temp = comment['snippet']['topLevelComment']['snippet']['textDisplay']
+#         username = comment['snippet']['topLevelComment']['snippet']['authorDisplayName']
 
-        # comment_dat = comment['snippet']['topLevelComment']['snippet']['textDisplay']
-        comment_dat = {"comment":comment_temp, "username":username}
+#         # comment_dat = comment['snippet']['topLevelComment']['snippet']['textDisplay']
+#         comment_dat = {"comment":comment_temp, "username":username}
 
-        # Ensures that doesn't try to append nothing if there is replies if none
-        if 'replies' in comment:
-            for reply in comment['replies']['comments']:
-                replies.append({"reply":reply['snippet']['textDisplay'], "username":reply['snippet']['authorDisplayName']})
+#         # Ensures that doesn't try to append nothing if there is replies if none
+#         if 'replies' in comment:
+#             for reply in comment['replies']['comments']:
+#                 replies.append({"reply":reply['snippet']['textDisplay'], "username":reply['snippet']['authorDisplayName']})
 
-        temp = {"comment":comment_dat, "replies":replies}
-        collective.append(temp)
+#         temp = {"comment":comment_dat, "replies":replies}
+#         collective.append(temp)
         
-        # DONT NEED FOR TOP LEVEL REPLIES
-        # Hold id for current comment
-        #comment_id = comment['snippet']['topLevelComment']['id']
-        #id = comment['snippet']['videoId']
+#         # DONT NEED FOR TOP LEVEL REPLIES
+#         # Hold id for current comment
+#         #comment_id = comment['snippet']['topLevelComment']['id']
+#         #id = comment['snippet']['videoId']
 
 
-        #comments.append(comment_dat)
-        #comments_id.append(comment_id) (not needed)
+#         #comments.append(comment_dat)
+#         #comments_id.append(comment_id) (not needed)
     
 
 
-    # Correctly stores dat in mem
-    #print(f"COMMENT:{comments}\n")
+#     # Correctly stores dat in mem
+#     #print(f"COMMENT:{comments}\n")
     
-    # print(f"COLLECTIVE: {collective}")
+#     # print(f"COLLECTIVE: {collective}")
 
     
-    # Testing static context redirect
-    #context = {"comments":["com1", "com2"]}
-    context = {"comments":collective}
-    #context = {"context":collective}
+#     # Testing static context redirect
+#     #context = {"comments":["com1", "com2"]}
+#     context = {"comments":collective}
+#     #context = {"context":collective}
 
-    return flask.render_template("index.html", **context)
+#     return flask.render_template("index.html", **context)
 
 @tk_app.app.route('/livestream/')
 def live_func():

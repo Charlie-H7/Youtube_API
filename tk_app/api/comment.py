@@ -14,6 +14,7 @@ youtube = build('youtube', 'v3', developerKey=api_key)
 # Need to render index here since solely stickig to server side dynamic for now
 @tk_app.app.route('/api/v1/comments/')
 def get_comments():
+    print("IM PRINTING PY")
     comments = [] #just data top level comm
     replies_dict = [] #Stores replies and names of that list of dictionaries
     collective = [] #Use this to append TOTAL list of tied comments + replies PER TOP LVL 
@@ -61,4 +62,6 @@ def get_comments():
         collective.append(temp)
         context = {"comments":collective}
 
-        return flask.jsonify(**context)
+
+
+    return flask.jsonify(**context)
