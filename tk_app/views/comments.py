@@ -93,7 +93,7 @@ def live_func():
     #0 Get current active livestreams chatid via broadcast api
     #broadcasts = youtube.Broadcasts.list(
 
-    #)
+    #
 
     #NEW 0) Automate getting video id's via 'search' method 'forMine' filter
     #https://developers.google.com/youtube/v3/docs/search/list
@@ -117,6 +117,10 @@ def live_func():
     return flask.render_template("index.html", **context)
 
 
+#Should only be retrieving info from a DB, if i render and make a https req here, then its not really client side is it
+#@tk_app.app.route("/comments/")
+#def load_comments()
+
 # Used for initial render
 @tk_app.app.route('/')
 def page_init():
@@ -124,7 +128,7 @@ def page_init():
     
 
     #tk_app.app.logger("bruh??")
-    print("bruh\n")
+    print("Initial render")
     context = {"comments":["com1", "com2"]}
     return flask.render_template("index.html", **context)
 

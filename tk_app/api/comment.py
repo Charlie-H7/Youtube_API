@@ -63,5 +63,7 @@ def get_comments():
         context = {"comments":collective}
 
 
-
+    # print(f"CONTEXT: {context}")
+    formatted_json = json.dumps(context, indent=3)
+    print(f"COMTEXT: {formatted_json}")
     return flask.jsonify(**context)

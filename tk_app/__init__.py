@@ -9,3 +9,4 @@ app = flask.Flask(__name__)
 # Import views to register the routes
 from tk_app.views import *
 import tk_app.api
+from tk_app.api import comment  # Ensure API routes are registered

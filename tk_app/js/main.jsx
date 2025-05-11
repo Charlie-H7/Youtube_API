@@ -6,11 +6,17 @@ import Comment from "./comment";
 //Make root into id "reactEntry" this is what is rendered in place of the
 
 // const root = createRoot(document.getElementById("reactEntry"));
-console.log("Here out")
+console.log("Here ot")
+const root = createRoot(document.getElementById("reactEntry"));
 
 export function render_comments() {
-    const root = createRoot(document.getElementById("reactEntry"));
+    // const root = createRoot(document.getElementById("reactEntry"));
     console.log("Here")
+
+    // root.render(
+    //     <div>Test</div>
+    // );
+
     root.render(
         <StrictMode>
             <Comment post_url="/api/v1/comments/" />

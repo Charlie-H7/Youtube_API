@@ -56,3 +56,41 @@ ______
 
 
     </body>
+
+
+
+
+    _________
+
+    <!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>tk</title>
+    </head>
+
+    <h1>list of comments</h1>
+
+    <body>
+        
+        <script type = "text/javascript" src="/static/js/bundle.js"></script>
+        <a href="/comments?target=/" onclick="render_comments(); return false;">Fetch comments</a>
+        
+
+        <!-- dynamic later (first see how to impl)-->
+        <a href="/livestream?target=/">Fecth live</a>
+
+        <div id="reactEntry">Null</div>
+
+        <!--NEW MAKE THE THING HERE BE RENDERED BY CLIENT THEN THERE MUST BE "COMMENTS"-->
+        <!-- Make a flaks templated comment for each file -->
+        <!--<script type = "text/javascript" src="/static/js/bundle.js"></script>-->
+
+
+
+
+    </body>
+
+
+</html>
