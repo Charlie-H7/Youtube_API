@@ -121,16 +121,16 @@ def live_func():
 #@tk_app.app.route("/comments/")
 #def load_comments()
 
-# Used for initial render
-@tk_app.app.route('/')
-def page_init():
+# # Used for initial render
+# @tk_app.app.route('/')
+# def page_init():
 
     
 
-    #tk_app.app.logger("bruh??")
-    print("Initial render")
-    context = {"comments":["com1", "com2"]}
-    return flask.render_template("index.html", **context)
+#     #tk_app.app.logger("bruh??")
+#     print("Initial render")
+#     context = {"comments":["com1", "com2"]}
+#     return flask.render_template("index.html", **context)
 
 # Flask API endpoint that sends get request for comments, and renders template. "officially dont know"
 # Would ideally need this api call to give me all the data I need before rendering
