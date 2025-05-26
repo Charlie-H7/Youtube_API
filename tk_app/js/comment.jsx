@@ -8,6 +8,7 @@ export default function Comment({ post_url }) {
     // Call API endpoint to get comments from video...
     console.log("fetch comments entered");
 
+    const [link, setLink] = useState("");
     const [commentsData, setCommentsData] = useState(null);
     useEffect( () => {
         // let ignoreStaleRequest = false;
