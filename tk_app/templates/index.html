@@ -16,7 +16,7 @@
             That view handles user input (like a submitted comment), and may call an API function to process the data.
             'url_for' ensures the correct route is used, even if the URL changes later. -->
         <form action="{{ url_for('get_comments') }}?target=/" method="post">
-            <input type="text" name="link" required/>
+            <input type="text" name="link" id="linkInput" required/>
             <input type="submit" value="search"/>
             <input type="hidden" name="operation" value="search"> <!--You can’t rely on the submit button’s value being sent in every case, especially if the form is submitted via keyboard (e.g., pressing Enter). That’s why we use a separate hidden field like:-->
         </form>
